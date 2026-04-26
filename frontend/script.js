@@ -147,6 +147,7 @@ function loadTasks() {
 
           <small>📍 Location: ${task.location || "Not set"}</small><br>
           <small>⚡ Urgency: ${task.urgency || "low"}</small><br>
+          <small>📂 Category: ${task.category || "others"}</small><br>
           <small>⏰ Deadline: ${task.deadline ? new Date(task.deadline).toLocaleString() : "None"}</small><br>
 
           <small>👤 ${ownerText}</small><br>
@@ -175,7 +176,7 @@ function loadTasks() {
     });
 }
 
-/* ---------------- ADD TASK (UPGRADED) ---------------- */
+/* ---------------- ADD TASK (WITH CATEGORY FIX) ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
@@ -185,6 +186,8 @@ function addTask() {
   const deadline = document.getElementById("deadline").value;
   const urgency = document.getElementById("urgency").value;
 
+  const category = document.getElementById("category").value;
+
   const type = document.getElementById("offerType").value;
 
   const cash = document.getElementById("cashInput").value.trim();
@@ -192,6 +195,12 @@ function addTask() {
 
   if (!title || !desc) {
     alert("Please fill Title and Description");
+    return;
+  }
+
+  // ✅ CATEGORY VALIDATION
+  if (!category) {
+    alert("Please select a category");
     return;
   }
 
@@ -216,6 +225,9 @@ function addTask() {
       location,
       deadline,
       urgency,
+
+      category, // ✅ IMPORTANT
+
       exchange_offer: offer,
       created_by: currentUserId,
       status: "pending"
@@ -238,6 +250,9 @@ function addTask() {
     document.getElementById("location").value = "";
     document.getElementById("deadline").value = "";
     document.getElementById("urgency").value = "low";
+
+    // ✅ reset category properly
+    document.getElementById("category").value = "";
 
     document.getElementById("cashInput").value = "";
     document.getElementById("goodsInput").value = "";

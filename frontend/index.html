@@ -66,9 +66,7 @@
     <input id="title" placeholder="Title">
     <input id="desc" placeholder="Description">
 
-    <!-- NEW FIELDS -->
     <input id="location" placeholder="Location (e.g. UP Diliman)">
-
     <input id="deadline" type="datetime-local">
 
     <select id="urgency">
@@ -77,7 +75,19 @@
       <option value="high">High Priority</option>
     </select>
 
-    <!-- EXISTING -->
+    <!-- 🟣 CATEGORY (FIXED DEFAULT) -->
+    <select id="category">
+      <option value="" selected disabled>Category</option>
+      <option value="errands">Errands</option>
+      <option value="delivery">Delivery</option>
+      <option value="school_help">School Help</option>
+      <option value="emergency">Emergency Help</option>
+      <option value="tech_support">Tech Support</option>
+      <option value="household">Household Help</option>
+      <option value="others">Others</option>
+    </select>
+
+    <!-- OFFER TYPE -->
     <select id="offerType" onchange="handleOfferType()">
       <option value="">Offer Type</option>
       <option value="cash">Cash</option>

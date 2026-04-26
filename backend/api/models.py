@@ -25,6 +25,23 @@ class Task(models.Model):
         ('high', 'High'),
     ]
 
+    CATEGORY_CHOICES = [
+        ('errands', 'Errands'),
+        ('delivery', 'Delivery'),
+        ('school_help', 'School Help'),
+        ('emergency', 'Emergency Help'),
+        ('tech_support', 'Tech Support'),
+        ('household', 'Household Help'),
+        ('others', 'Others'),
+    ]
+
+    # ✅ CATEGORY FIELD (fixed placement)
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+        default='others'
+    )
+
     title = models.CharField(max_length=200)
     description = models.TextField()
 
@@ -36,7 +53,13 @@ class Task(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    accepted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='accepted_tasks')
+    accepted_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='accepted_tasks'
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 
