@@ -3,7 +3,6 @@ from rest_framework import viewsets
 from .models import Task, User
 from .serializers import TaskSerializer
 
-
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -13,7 +12,6 @@ class TaskViewSet(viewsets.ModelViewSet):
 
         data = request.data.copy()
 
-        # 🔥 FORCE accepted_by to be saved
         accepted_by = data.get("accepted_by", None)
 
         if accepted_by is not None:
@@ -23,7 +21,6 @@ class TaskViewSet(viewsets.ModelViewSet):
             except User.DoesNotExist:
                 pass
 
-        # update other fields normally
         for attr, value in data.items():
             if attr != "accepted_by":
                 setattr(instance, attr, value)

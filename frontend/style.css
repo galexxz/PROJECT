@@ -9,7 +9,6 @@ body {
   background: #eef2f7;
 }
 
-/* SIDEBAR */
 .sidebar {
   position: fixed;
   width: 240px;
@@ -36,13 +35,11 @@ body {
   background: #1f0402;
 }
 
-/* MAIN */
 .main {
   margin-left: 240px;
   padding: 20px;
 }
 
-/* TOPBAR */
 .topbar {
   background: white;
   padding: 15px;
@@ -51,7 +48,6 @@ body {
   border-radius: 10px;
 }
 
-/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -66,7 +62,6 @@ body {
   border-radius: 10px;
 }
 
-/* FORM */
 .form-box {
   background: white;
   padding: 15px;
@@ -89,7 +84,6 @@ button {
   border-radius: 8px;
 }
 
-/* TASK */
 .task {
   background: white;
   padding: 15px;
@@ -97,7 +91,6 @@ button {
   border-radius: 10px;
 }
 
-/* BUTTONS */
 .task button {
   margin-right: 5px;
 }
@@ -106,7 +99,6 @@ button {
 .complete { background: #1f0402; color: white; }
 .delete { background: #4f1611; color: white; }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
 
   .sidebar {

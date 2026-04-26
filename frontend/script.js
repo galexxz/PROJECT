@@ -9,7 +9,6 @@ const USERS = {
 let currentUserId;
 let currentView = "dashboard";
 
-/* ---------------- TIME FORMAT ---------------- */
 function timeAgo(dateString) {
   if (!dateString) return "";
 
@@ -25,7 +24,6 @@ function timeAgo(dateString) {
   return past.toLocaleDateString();
 }
 
-/* ---------------- INIT USER ---------------- */
 function initUser() {
   let saved = sessionStorage.getItem("userId");
 
@@ -33,7 +31,7 @@ function initUser() {
     saved = prompt("Enter User ID (1 or 2):");
 
     while (saved !== "1" && saved !== "2") {
-      alert("❌ Invalid input. Please enter ONLY 1 or 2.");
+      alert("Invalid input. Please enter 1 or 2.");
       saved = prompt("Enter User ID (1 or 2):");
     }
 
@@ -46,13 +44,11 @@ function initUser() {
     USERS[currentUserId];
 }
 
-/* ---------------- SWITCH USER ---------------- */
 function switchUser() {
   sessionStorage.removeItem("userId");
   location.reload();
 }
 
-/* ---------------- VIEW SWITCH ---------------- */
 function setView(view) {
   currentView = view;
 
@@ -64,7 +60,6 @@ function setView(view) {
   loadTasks();
 }
 
-/* ---------------- OFFER TYPE ---------------- */
 function handleOfferType() {
   let type = document.getElementById("offerType").value;
 
@@ -75,7 +70,6 @@ function handleOfferType() {
     type === "goods" ? "block" : "none";
 }
 
-/* ---------------- LOAD TASKS ---------------- */
 function loadTasks() {
   fetch(API)
     .then(res => res.json())
@@ -104,7 +98,6 @@ function loadTasks() {
         }
       });
 
-      /* ---------------- RENDER ---------------- */
       data.forEach(task => {
 
         const isOwner = Number(task.created_by) === currentUserId;
@@ -182,7 +175,6 @@ function loadTasks() {
     });
 }
 
-/* ---------------- ADD TASK (FIXED) ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
@@ -225,9 +217,13 @@ function addTask() {
       status: "pending"
     })
   })
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to add task");
-    return res.json();
+  .then(async res => {
+  if (!res.ok) {
+    const text = await res.text();
+    console.log(" BACKEND ERROR:", text);
+    throw new Error("Failed to add task");
+  }
+  return res.json();
   })
   .then(() => {
 
@@ -246,17 +242,15 @@ function addTask() {
   })
   .catch(err => {
     console.error(err);
-    alert("Error adding task ❌ Check backend");
+    alert("Error adding task.");
   });
 }
 
-/* ---------------- DELETE ---------------- */
 function deleteTask(id) {
   fetch(API + id + "/", { method: "DELETE" })
     .then(() => loadTasks());
 }
 
-/* ---------------- ACCEPT ---------------- */
 function acceptTask(id) {
   fetch(API + id + "/", {
     method: "PATCH",
@@ -268,7 +262,6 @@ function acceptTask(id) {
   }).then(() => loadTasks());
 }
 
-/* ---------------- COMPLETE ---------------- */
 function completeTask(id) {
   fetch(API + id + "/", {
     method: "PATCH",
@@ -279,7 +272,6 @@ function completeTask(id) {
   }).then(() => loadTasks());
 }
 
-/* ---------------- INIT ---------------- */
 initUser();
 setView("dashboard");
 loadTasks();
