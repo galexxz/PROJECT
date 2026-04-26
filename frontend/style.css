@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: #eef2f7;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  width: 240px;
+  height: 100vh;
+  background: #280b0a;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background: #1f0402;
+}
+
+/* MAIN */
+.main {
+  margin-left: 240px;
+  padding: 20px;
+}
+
+/* TOPBAR */
+.topbar {
+  background: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* FORM */
+.form-box {
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1f0402;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+/* TASK */
+.task {
+  background: white;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* BUTTONS */
+.task button {
+  margin-right: 5px;
+}
+
+.accept { background: #492421; color: white; }
+.complete { background: #1f0402; color: white; }
+.delete { background: #4f1611; color: white; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

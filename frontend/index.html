@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bayanihan System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Bayanihan</h2>
+
+  <a onclick="setView('dashboard')">
+    Tasks <span id="taskLabel">(0)</span>
+  </a>
+
+  <a onclick="setView('ongoing')">
+    Ongoing <span id="ongoingLabel">(0)</span>
+  </a>
+
+  <a onclick="setView('completed')">
+    Completed <span id="completedLabel">(0)</span>
+  </a>
+
+  <a onclick="setView('requests')">
+    My Requests <span id="requestLabel">(0)</span>
+  </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <h2>Bayanihan Dashboard</h2>
+
+    <div>
+      <button onclick="switchUser()">Switch User</button>
+      <span id="userDisplay"></span>
+    </div>
+  </div>
+
+  <!-- DASHBOARD SUMMARY CARDS -->
+  <div class="cards">
+
+    <div class="card">
+      <h3>Tasks</h3>
+      <p id="total">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Ongoing</h3>
+      <p id="ongoing">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Completed</h3>
+      <p id="completed">0</p>
+    </div>
+
+  </div>
+
+  <!-- CREATE TASK FORM (ONLY DASHBOARD) -->
+  <div class="form-box" id="createBox">
+
+    <h3>Create Task</h3>
+
+    <input id="title" placeholder="Title">
+    <input id="desc" placeholder="Description">
+
+    <select id="offerType" onchange="handleOfferType()">
+      <option value="">Offer Type</option>
+      <option value="cash">Cash</option>
+      <option value="goods">Goods</option>
+    </select>
+
+    <input id="cashInput" placeholder="Cash" style="display:none;">
+    <input id="goodsInput" placeholder="Goods" style="display:none;">
+
+    <button onclick="addTask()">Add Task</button>
+
+  </div>
+
+  <!-- TASK LIST -->
+  <h3>Feed</h3>
+  <div id="taskList"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
