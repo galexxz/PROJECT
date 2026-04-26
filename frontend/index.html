@@ -58,6 +58,7 @@
 
   </div>
 
+  <!-- 🟢 CREATE TASK FORM -->
   <div class="form-box" id="createBox">
 
     <h3>Create Task</h3>
@@ -65,6 +66,18 @@
     <input id="title" placeholder="Title">
     <input id="desc" placeholder="Description">
 
+    <!-- NEW FIELDS -->
+    <input id="location" placeholder="Location (e.g. UP Diliman)">
+
+    <input id="deadline" type="datetime-local">
+
+    <select id="urgency">
+      <option value="low">Low Priority</option>
+      <option value="medium">Medium Priority</option>
+      <option value="high">High Priority</option>
+    </select>
+
+    <!-- EXISTING -->
     <select id="offerType" onchange="handleOfferType()">
       <option value="">Offer Type</option>
       <option value="cash">Cash</option>

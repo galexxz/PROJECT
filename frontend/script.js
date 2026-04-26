@@ -9,6 +9,7 @@ const USERS = {
 let currentUserId;
 let currentView = "dashboard";
 
+/* ---------------- TIME FORMAT ---------------- */
 function timeAgo(dateString) {
   if (!dateString) return "";
 
@@ -24,6 +25,7 @@ function timeAgo(dateString) {
   return past.toLocaleDateString();
 }
 
+/* ---------------- INIT USER ---------------- */
 function initUser() {
   let saved = sessionStorage.getItem("userId");
 
@@ -44,11 +46,13 @@ function initUser() {
     USERS[currentUserId];
 }
 
+/* ---------------- SWITCH USER ---------------- */
 function switchUser() {
   sessionStorage.removeItem("userId");
   location.reload();
 }
 
+/* ---------------- VIEW SWITCH ---------------- */
 function setView(view) {
   currentView = view;
 
@@ -60,6 +64,7 @@ function setView(view) {
   loadTasks();
 }
 
+/* ---------------- OFFER TYPE ---------------- */
 function handleOfferType() {
   let type = document.getElementById("offerType").value;
 
@@ -70,6 +75,7 @@ function handleOfferType() {
     type === "goods" ? "block" : "none";
 }
 
+/* ---------------- LOAD TASKS ---------------- */
 function loadTasks() {
   fetch(API)
     .then(res => res.json())
@@ -82,20 +88,14 @@ function loadTasks() {
       let ongoingCount = 0;
       let completedCount = 0;
       let myRequests = 0;
-      let dashboardAvailable = 0;
 
       data.forEach(task => {
-
         const isOwner = Number(task.created_by) === currentUserId;
 
         if (!isOwner && task.status === "pending") availableTasks++;
         if (task.status === "ongoing") ongoingCount++;
         if (task.status === "completed") completedCount++;
         if (isOwner) myRequests++;
-
-        if (!isOwner && task.status === "pending" && !task.accepted_by) {
-          dashboardAvailable++;
-        }
       });
 
       data.forEach(task => {
@@ -103,11 +103,7 @@ function loadTasks() {
         const isOwner = Number(task.created_by) === currentUserId;
 
         if (currentView === "dashboard") {
-          if (
-            task.status !== "pending" ||
-            isOwner ||
-            task.accepted_by
-          ) return;
+          if (task.status !== "pending" || isOwner || task.accepted_by) return;
         }
 
         if (currentView === "ongoing" && task.status !== "ongoing") return;
@@ -149,6 +145,10 @@ function loadTasks() {
           <b>${task.title}</b><br>
           ${task.description}<br>
 
+          <small>📍 Location: ${task.location || "Not set"}</small><br>
+          <small>⚡ Urgency: ${task.urgency || "low"}</small><br>
+          <small>⏰ Deadline: ${task.deadline ? new Date(task.deadline).toLocaleString() : "None"}</small><br>
+
           <small>👤 ${ownerText}</small><br>
           ${acceptedText}
           <small>${task.exchange_offer || ""}</small><br>
@@ -162,7 +162,7 @@ function loadTasks() {
       });
 
       /* DASHBOARD STATS */
-      document.getElementById("total").innerText = dashboardAvailable;
+      document.getElementById("total").innerText = availableTasks;
       document.getElementById("ongoing").innerText = ongoingCount;
       document.getElementById("completed").innerText = completedCount;
 
@@ -175,10 +175,16 @@ function loadTasks() {
     });
 }
 
+/* ---------------- ADD TASK (UPGRADED) ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
   const desc = document.getElementById("desc").value.trim();
+
+  const location = document.getElementById("location").value.trim();
+  const deadline = document.getElementById("deadline").value;
+  const urgency = document.getElementById("urgency").value;
+
   const type = document.getElementById("offerType").value;
 
   const cash = document.getElementById("cashInput").value.trim();
@@ -186,11 +192,6 @@ function addTask() {
 
   if (!title || !desc) {
     alert("Please fill Title and Description");
-    return;
-  }
-
-  if (!type) {
-    alert("Select Offer Type");
     return;
   }
 
@@ -212,18 +213,21 @@ function addTask() {
     body: JSON.stringify({
       title,
       description: desc,
+      location,
+      deadline,
+      urgency,
       exchange_offer: offer,
       created_by: currentUserId,
       status: "pending"
     })
   })
   .then(async res => {
-  if (!res.ok) {
-    const text = await res.text();
-    console.log(" BACKEND ERROR:", text);
-    throw new Error("Failed to add task");
-  }
-  return res.json();
+    if (!res.ok) {
+      const text = await res.text();
+      console.log("BACKEND ERROR:", text);
+      throw new Error("Failed to add task");
+    }
+    return res.json();
   })
   .then(() => {
 
@@ -231,6 +235,10 @@ function addTask() {
 
     document.getElementById("title").value = "";
     document.getElementById("desc").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("deadline").value = "";
+    document.getElementById("urgency").value = "low";
+
     document.getElementById("cashInput").value = "";
     document.getElementById("goodsInput").value = "";
     document.getElementById("offerType").value = "";
@@ -246,6 +254,7 @@ function addTask() {
   });
 }
 
+/* ---------------- ACTIONS ---------------- */
 function deleteTask(id) {
   fetch(API + id + "/", { method: "DELETE" })
     .then(() => loadTasks());
@@ -272,6 +281,7 @@ function completeTask(id) {
   }).then(() => loadTasks());
 }
 
+/* ---------------- INIT ---------------- */
 initUser();
 setView("dashboard");
 loadTasks();
