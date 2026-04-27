@@ -9,7 +9,11 @@
 <body>
 
 <div class="sidebar">
-  <h2>Bayanihan</h2>
+  <h2>BAYANIHAN</h2>
+
+  <div class="user-greeting">
+    Hello, <span id="userDisplay"></span>
+  </div>
 
   <a onclick="setView('dashboard')">
     Tasks <span id="taskLabel">(0)</span>
@@ -26,17 +30,16 @@
   <a onclick="setView('requests')">
     My Requests <span id="requestLabel">(0)</span>
   </a>
+
+  <div class="switch-user">
+    <button onclick="switchUser()">Switch User</button>
+  </div>
 </div>
 
 <div class="main">
 
   <div class="topbar">
-    <h2>Bayanihan Dashboard</h2>
-
-    <div>
-      <button onclick="switchUser()">Switch User</button>
-      <span id="userDisplay"></span>
-    </div>
+    <h2>BAYANIHAN DASHBOARD</h2>
   </div>
 
   <div class="cards">
@@ -56,17 +59,20 @@
     </div>
   </div>
 
-  <div class="form-box" id="createBox">
+  <!-- ✅ CREATE BUTTON -->
+  <button class="create-btn" onclick="toggleCreate()">
+    + Create Task
+  </button>
 
+  <!-- ✅ HIDDEN FORM -->
+  <div class="form-box" id="createBox" style="display:none;">
     <h3>Create Task</h3>
 
     <input id="title" placeholder="Title">
     <input id="desc" placeholder="Description">
 
-    <!-- ✅ FIXED CITY -->
     <input value="Lucena City" disabled>
 
-    <!-- ✅ BARANGAY DROPDOWN -->
     <select id="barangay">
       <option value="" disabled selected>Select Barangay</option>
       <option>Barangay 1 (Pob.)</option>
@@ -112,7 +118,6 @@
       <option value="high">High Priority</option>
     </select>
 
-    <!-- CATEGORY -->
     <select id="category">
       <option value="" disabled selected>Category</option>
       <option value="errands">Errands</option>
@@ -124,7 +129,6 @@
       <option value="others">Others</option>
     </select>
 
-    <!-- OFFER -->
     <select id="offerType" onchange="handleOfferType()">
       <option value="">Offer Type</option>
       <option value="cash">Cash</option>
@@ -135,10 +139,9 @@
     <input id="goodsInput" placeholder="Goods" style="display:none;">
 
     <button onclick="addTask()">Add Task</button>
-
   </div>
 
-  <h3>Feed</h3>
+  <h2>Feed</h2>
   <div id="taskList"></div>
 
 </div>

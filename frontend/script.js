@@ -9,6 +9,17 @@ const USERS = {
 let currentUserId;
 let currentView = "dashboard";
 
+/* ---------------- TOGGLE CREATE FORM ---------------- */
+function toggleCreate() {
+  const box = document.getElementById("createBox");
+
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
+
 /* ---------------- TIME FORMAT ---------------- */
 function timeAgo(dateString) {
   if (!dateString) return "";
@@ -58,7 +69,7 @@ function setView(view) {
 
   const createBox = document.getElementById("createBox");
   if (createBox) {
-    createBox.style.display = view === "dashboard" ? "block" : "none";
+    createBox.style.display = "none"; // ✅ FIXED (no conflict with button)
   }
 
   loadTasks();
@@ -162,12 +173,10 @@ function loadTasks() {
         list.appendChild(div);
       });
 
-      /* DASHBOARD STATS */
       document.getElementById("total").innerText = availableTasks;
       document.getElementById("ongoing").innerText = ongoingCount;
       document.getElementById("completed").innerText = completedCount;
 
-      /* SIDEBAR */
       document.getElementById("taskLabel").innerText = `(${availableTasks})`;
       document.getElementById("ongoingLabel").innerText = `(${ongoingCount})`;
       document.getElementById("completedLabel").innerText = `(${completedCount})`;
@@ -176,7 +185,7 @@ function loadTasks() {
     });
 }
 
-/* ---------------- ADD TASK (UPDATED WITH BARANGAY) ---------------- */
+/* ---------------- ADD TASK ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
@@ -262,6 +271,8 @@ function addTask() {
 
     document.getElementById("cashInput").style.display = "none";
     document.getElementById("goodsInput").style.display = "none";
+
+    toggleCreate(); // ✅ auto close
 
     alert("Task added ✅");
   })

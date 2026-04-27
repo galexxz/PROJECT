@@ -9,6 +9,7 @@ body {
   background: #eef2f7;
 }
 
+/* SIDEBAR */
 .sidebar {
   position: fixed;
   width: 240px;
@@ -16,10 +17,10 @@ body {
   background: #0a1e44;
   color: white;
   padding: 20px;
-}
 
-.sidebar h2 {
-  margin-bottom: 20px;
+  /* ✅ important for bottom placement */
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar a {
@@ -29,19 +30,36 @@ body {
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .sidebar a:hover {
   background: #030928;
 }
 
+/* ✅ pushes switch user to bottom */
+.switch-user {
+  margin-top: auto;
+}
+
+.switch-user button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.switch-user span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* MAIN CONTENT */
 .main {
   margin-left: 240px;
   padding: 20px;
 }
 
 .topbar {
-  background: white;
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -78,12 +96,18 @@ input, select {
 button {
   margin-top: 10px;
   padding: 10px;
-  background: #1f0402;
+  background: #0d0a39;
   color: white;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 }
 
+button:hover {
+  opacity: 0.9;
+}
+
+/* TASK LIST */
 .task {
   background: white;
   padding: 15px;
@@ -99,14 +123,20 @@ button {
 .complete { background: #1f0402; color: white; }
 .delete { background: #4f1611; color: white; }
 
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
 
   .sidebar {
     position: relative;
     width: 100%;
     height: auto;
-    display: flex;
+    flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+  }
+
+  .switch-user {
+    margin-top: 0;
   }
 
   .main {
@@ -116,4 +146,29 @@ button {
   .cards {
     grid-template-columns: 1fr;
   }
+}
+
+.user-greeting {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #cbd5ff;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  text-align: center; /* ✅ centers the text */
+}
+
+.create-btn {
+  margin-top: 20px;
+  padding: 12px;
+  background: #0a1e44;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+h2 {
+  margin-top: 20px;
 }
