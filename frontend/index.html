@@ -40,7 +40,6 @@
   </div>
 
   <div class="cards">
-
     <div class="card">
       <h3>Tasks</h3>
       <p id="total">0</p>
@@ -55,10 +54,8 @@
       <h3>Completed</h3>
       <p id="completed">0</p>
     </div>
-
   </div>
 
-  <!-- 🟢 CREATE TASK FORM -->
   <div class="form-box" id="createBox">
 
     <h3>Create Task</h3>
@@ -66,7 +63,47 @@
     <input id="title" placeholder="Title">
     <input id="desc" placeholder="Description">
 
-    <input id="location" placeholder="Location (e.g. UP Diliman)">
+    <!-- ✅ FIXED CITY -->
+    <input value="Lucena City" disabled>
+
+    <!-- ✅ BARANGAY DROPDOWN -->
+    <select id="barangay">
+      <option value="" disabled selected>Select Barangay</option>
+      <option>Barangay 1 (Pob.)</option>
+      <option>Barangay 2 (Pob.)</option>
+      <option>Barangay 3 (Pob.)</option>
+      <option>Barangay 4 (Pob.)</option>
+      <option>Barangay 5 (Pob.)</option>
+      <option>Barangay 6 (Pob.)</option>
+      <option>Barangay 7 (Pob.)</option>
+      <option>Barangay 8 (Pob.)</option>
+      <option>Barangay 9 (Pob.)</option>
+      <option>Barangay 10 (Pob.)</option>
+      <option>Barangay 11 (Pob.)</option>
+      <option>Barangay 12 (Pob.)</option>
+      <option>Barangay 13 (Pob.)</option>
+      <option>Barangay 14 (Pob.)</option>
+      <option>Bocohan</option>
+      <option>Cotta</option>
+      <option>Dalahican</option>
+      <option>Gulang-Gulang</option>
+      <option>Ibabang Dupay</option>
+      <option>Ibabang Iyam</option>
+      <option>Ibabang Talim</option>
+      <option>Ilayang Dupay</option>
+      <option>Ilayang Iyam</option>
+      <option>Ilayang Talim</option>
+      <option>Isabang</option>
+      <option>Mayao Castillo</option>
+      <option>Mayao Crossing</option>
+      <option>Mayao Kanluran</option>
+      <option>Mayao Parada</option>
+      <option>Mayao Silangan</option>
+      <option>Ransohan</option>
+      <option>Salinas</option>
+      <option>Talao-Talao</option>
+    </select>
+
     <input id="deadline" type="datetime-local">
 
     <select id="urgency">
@@ -75,9 +112,9 @@
       <option value="high">High Priority</option>
     </select>
 
-    <!-- 🟣 CATEGORY (FIXED DEFAULT) -->
+    <!-- CATEGORY -->
     <select id="category">
-      <option value="" selected disabled>Category</option>
+      <option value="" disabled selected>Category</option>
       <option value="errands">Errands</option>
       <option value="delivery">Delivery</option>
       <option value="school_help">School Help</option>
@@ -87,7 +124,7 @@
       <option value="others">Others</option>
     </select>
 
-    <!-- OFFER TYPE -->
+    <!-- OFFER -->
     <select id="offerType" onchange="handleOfferType()">
       <option value="">Offer Type</option>
       <option value="cash">Cash</option>

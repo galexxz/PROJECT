@@ -176,13 +176,15 @@ function loadTasks() {
     });
 }
 
-/* ---------------- ADD TASK (WITH CATEGORY FIX) ---------------- */
+/* ---------------- ADD TASK (UPDATED WITH BARANGAY) ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
   const desc = document.getElementById("desc").value.trim();
 
-  const location = document.getElementById("location").value.trim();
+  const barangay = document.getElementById("barangay").value;
+  const location = "Lucena City - " + barangay;
+
   const deadline = document.getElementById("deadline").value;
   const urgency = document.getElementById("urgency").value;
 
@@ -198,7 +200,11 @@ function addTask() {
     return;
   }
 
-  // ✅ CATEGORY VALIDATION
+  if (!barangay) {
+    alert("Please select a barangay");
+    return;
+  }
+
   if (!category) {
     alert("Please select a category");
     return;
@@ -225,9 +231,7 @@ function addTask() {
       location,
       deadline,
       urgency,
-
-      category, // ✅ IMPORTANT
-
+      category,
       exchange_offer: offer,
       created_by: currentUserId,
       status: "pending"
@@ -247,12 +251,10 @@ function addTask() {
 
     document.getElementById("title").value = "";
     document.getElementById("desc").value = "";
-    document.getElementById("location").value = "";
     document.getElementById("deadline").value = "";
     document.getElementById("urgency").value = "low";
-
-    // ✅ reset category properly
     document.getElementById("category").value = "";
+    document.getElementById("barangay").value = "";
 
     document.getElementById("cashInput").value = "";
     document.getElementById("goodsInput").value = "";
