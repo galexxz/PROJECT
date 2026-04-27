@@ -13,7 +13,7 @@ body {
   position: fixed;
   width: 240px;
   height: 100vh;
-  background: #280b0a;
+  background: #0a1e44;
   color: white;
   padding: 20px;
 }
@@ -32,7 +32,7 @@ body {
 }
 
 .sidebar a:hover {
-  background: #1f0402;
+  background: #030928;
 }
 
 .main {
