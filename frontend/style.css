@@ -18,7 +18,6 @@ body {
   color: white;
   padding: 20px;
 
-  /* ✅ important for bottom placement */
   display: flex;
   flex-direction: column;
 }
@@ -37,7 +36,6 @@ body {
   background: #030928;
 }
 
-/* ✅ pushes switch user to bottom */
 .switch-user {
   margin-top: auto;
 }
@@ -53,7 +51,6 @@ body {
   font-size: 14px;
 }
 
-/* MAIN CONTENT */
 .main {
   margin-left: 240px;
   padding: 20px;
@@ -107,7 +104,6 @@ button:hover {
   opacity: 0.9;
 }
 
-/* TASK LIST */
 .task {
   background: white;
   padding: 15px;
@@ -123,7 +119,6 @@ button:hover {
 .complete { background: #1f0402; color: white; }
 .delete { background: #4f1611; color: white; }
 
-/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
 
   .sidebar {
@@ -157,7 +152,7 @@ button:hover {
 
 .sidebar h2 {
   margin-bottom: 20px;
-  text-align: center; /* ✅ centers the text */
+  text-align: center;
 }
 
 .create-btn {

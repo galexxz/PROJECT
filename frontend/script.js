@@ -1,6 +1,5 @@
 const API = "http://127.0.0.1:8000/api/tasks/";
 
-/* USER MAP */
 const USERS = {
   1: "Maria",
   2: "John"
@@ -9,7 +8,6 @@ const USERS = {
 let currentUserId;
 let currentView = "dashboard";
 
-/* ---------------- TOGGLE CREATE FORM ---------------- */
 function toggleCreate() {
   const box = document.getElementById("createBox");
 
@@ -20,7 +18,6 @@ function toggleCreate() {
   }
 }
 
-/* ---------------- TIME FORMAT ---------------- */
 function timeAgo(dateString) {
   if (!dateString) return "";
 
@@ -36,7 +33,6 @@ function timeAgo(dateString) {
   return past.toLocaleDateString();
 }
 
-/* ---------------- INIT USER ---------------- */
 function initUser() {
   let saved = sessionStorage.getItem("userId");
 
@@ -57,25 +53,22 @@ function initUser() {
     USERS[currentUserId];
 }
 
-/* ---------------- SWITCH USER ---------------- */
 function switchUser() {
   sessionStorage.removeItem("userId");
   location.reload();
 }
 
-/* ---------------- VIEW SWITCH ---------------- */
 function setView(view) {
   currentView = view;
 
   const createBox = document.getElementById("createBox");
   if (createBox) {
-    createBox.style.display = "none"; // ✅ FIXED (no conflict with button)
+    createBox.style.display = "none";
   }
 
   loadTasks();
 }
 
-/* ---------------- OFFER TYPE ---------------- */
 function handleOfferType() {
   let type = document.getElementById("offerType").value;
 
@@ -86,7 +79,6 @@ function handleOfferType() {
     type === "goods" ? "block" : "none";
 }
 
-/* ---------------- LOAD TASKS ---------------- */
 function loadTasks() {
   fetch(API)
     .then(res => res.json())
@@ -185,7 +177,6 @@ function loadTasks() {
     });
 }
 
-/* ---------------- ADD TASK ---------------- */
 function addTask() {
 
   const title = document.getElementById("title").value.trim();
@@ -272,9 +263,9 @@ function addTask() {
     document.getElementById("cashInput").style.display = "none";
     document.getElementById("goodsInput").style.display = "none";
 
-    toggleCreate(); // ✅ auto close
+    toggleCreate();
 
-    alert("Task added ✅");
+    alert("Task added");
   })
   .catch(err => {
     console.error(err);
@@ -282,7 +273,6 @@ function addTask() {
   });
 }
 
-/* ---------------- ACTIONS ---------------- */
 function deleteTask(id) {
   fetch(API + id + "/", { method: "DELETE" })
     .then(() => loadTasks());
@@ -309,7 +299,6 @@ function completeTask(id) {
   }).then(() => loadTasks());
 }
 
-/* ---------------- INIT ---------------- */
 initUser();
 setView("dashboard");
 loadTasks();

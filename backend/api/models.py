@@ -1,7 +1,5 @@
 from django.db import models
 
-
-# 👇 USER MUST BE FIRST
 class User(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -9,8 +7,6 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-
-# 👇 TASK COMES AFTER USER
 class Task(models.Model):
 
     STATUS_CHOICES = [
@@ -35,14 +31,12 @@ class Task(models.Model):
         ('others', 'Others'),
     ]
 
-    # ✅ CATEGORY
     category = models.CharField(
         max_length=20,
         choices=CATEGORY_CHOICES,
         default='others'
     )
 
-    # 🟣 NEW BARANGAY FIELD
     BARANGAY_CHOICES = [
         ('brgy1', 'Barangay 1 (Pob.)'),
         ('brgy2', 'Barangay 2 (Pob.)'),
